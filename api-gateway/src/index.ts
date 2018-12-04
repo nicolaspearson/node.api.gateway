@@ -27,7 +27,12 @@ async function init() {
 		routes: {
 			cors: {
 				additionalHeaders: ['x-access-token'],
-				origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:4444']
+				origin: [
+					'http://localhost:3000',
+					'http://localhost:3001',
+					'http://localhost:4444',
+					'http://react.client.localhost'
+				]
 			}
 		}
 	});
