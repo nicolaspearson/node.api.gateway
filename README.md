@@ -18,22 +18,17 @@ The structure of this project allows us to easily scale workers in seconds. NATS
 -   -   This will remove the containers that were created
 -   Use the Postman file in `./system/postman` to test API requests.
 
-## Need a React frontend
+## Bonus
 
-An integrated React frontend has been developed and can be found at [react.antd.fuse](https://github.com/nicolaspearson/react.antd.fuse)
+Need a React frontend or a Kubernetes deployment? See below!
 
-### Captcha
+### React
 
-Captcha codes have been integrated using reCaptcha. Register for v2 reCaptcha codes [here](https://www.google.com/recaptcha/intro/v3.html), then change the secrets in the environment variables accordingly.
+A React frontend has been developed and can be found at [react.antd.fuse](https://github.com/nicolaspearson/react.antd.fuse)
 
-```
-"RECAPTCHA_SECRET": "<YOUR-SITE-KEY>"
-"RECAPTCHA_INVISIBLE_SECRET": "<YOUR-SITE-INVISIBLE-KEY>"
-```
+### Kubernetes
 
-## Need a Kubernetes deployment
-
-This project has been integrated with Kubernetes and can be found at [kubernetes.api.gateway](https://github.com/nicolaspearson/kubernetes.api.gateway)
+Kubernetes scripts for this project and can be found at [kubernetes.api.gateway](https://github.com/nicolaspearson/kubernetes.api.gateway)
 
 ## Development
 
@@ -225,6 +220,15 @@ src
    └── ...
 ```
 
+##### Captcha
+
+Captcha codes have been integrated using reCaptcha. Register for v2 reCaptcha codes [here](https://www.google.com/recaptcha/intro/v3.html), then change the secrets in the environment variables accordingly.
+
+```
+"RECAPTCHA_SECRET": "<YOUR-SITE-KEY>"
+"RECAPTCHA_INVISIBLE_SECRET": "<YOUR-SITE-INVISIBLE-KEY>"
+```
+
 #### Redis
 
 Redis serves primarily as the data store for caching `GET` request results of all of the microservices (individual configuration is required).
@@ -380,19 +384,19 @@ It is possible to debug code that is running in a docker container by following 
 1.  Add a new debug configuration to VS Code by opening `./.vscode/launch.json`, e.g.
 
 ```
-	{
-		"name": "Attach to Docker - Auth Service",
-		"type": "node",
-		"protocol": "inspector",
-		"request": "attach",
-		"restart": true,
-		"address": "localhost",
-		"sourceMaps": true,
-		"skipFiles": ["node_modules"],
-		"port": 9229,
-		"localRoot": "${workspaceRoot}/auth-service/",
-		"remoteRoot": "/home/app/node"
-	}
+{
+	"name": "Attach to Docker - Auth Service",
+	"type": "node",
+	"protocol": "inspector",
+	"request": "attach",
+	"restart": true,
+	"address": "localhost",
+	"sourceMaps": true,
+	"skipFiles": ["node_modules"],
+	"port": 9229,
+	"localRoot": "${workspaceRoot}/auth-service/",
+	"remoteRoot": "/home/app/node"
+}
 ```
 
 2.  Edit the docker configuration file in order to enable debugging on the running Node.js process, e.g.
