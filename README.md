@@ -376,19 +376,19 @@ It is possible to debug code that is running in a docker container by following 
 1.  Add a new debug configuration to VS Code by opening `./.vscode/launch.json`, e.g.
 
 ```
-		{
-			"name": "Attach to Docker - Auth Service",
-			"type": "node",
-			"protocol": "inspector",
-			"request": "attach",
-			"restart": true,
-			"address": "localhost",
-			"sourceMaps": true,
-			"skipFiles": ["node_modules"],
-			"port": 9229,
-			"localRoot": "${workspaceRoot}/auth-service/",
-			"remoteRoot": "/home/app/node"
-		}
+	{
+		"name": "Attach to Docker - Auth Service",
+		"type": "node",
+		"protocol": "inspector",
+		"request": "attach",
+		"restart": true,
+		"address": "localhost",
+		"sourceMaps": true,
+		"skipFiles": ["node_modules"],
+		"port": 9229,
+		"localRoot": "${workspaceRoot}/auth-service/",
+		"remoteRoot": "/home/app/node"
+	}
 ```
 
 2.  Edit the docker configuration file in order to enable debugging on the running Node.js process, e.g.
