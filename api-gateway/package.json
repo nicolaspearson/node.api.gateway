@@ -1,0 +1,66 @@
+{
+	"name": "node.api.gateway",
+	"version": "0.0.1",
+	"description": "API gateway",
+	"main": "dist",
+	"author": "Nicolas Pearson",
+	"repository": {
+		"type": "git"
+	},
+	"license": "UNLICENSED",
+	"scripts": {
+		"start": "npm run build && npm run watch",
+		"start:debug": "ts-node --inspect=5858 --debug-brk --ignore false ./src/index.ts",
+		"build": "rm -rf ./dist && npm run build:ts && npm run tslint && npm run copy:env",
+		"build:ts": "tsc --rootDir ./src/",
+		"debug": "npm run build && npm run watch:debug",
+		"serve": "nodemon dist/index.js",
+		"serve:debug": "nodemon --inspect=5858 --debug-brk --ignore false dist/index.js",
+		"watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve\"",
+		"watch:debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve:debug\"",
+		"watch:ts": "tsc -w",
+		"tslint": "tslint --fix -c tslint.json -p tsconfig.json",
+		"clean": "rm -rf node_modules && npm install",
+		"copy:env": "cp ./src/environments/*.json dist/environments/"
+	},
+	"dependencies": {
+		"blipp": "~3.1.1",
+		"good": "~8.1.1",
+		"good-console": "~7.1.0",
+		"good-squeeze": "~5.1.0",
+		"hapi": "~17.8.1",
+		"hapi-auth-jwt2": "~8.2.0",
+		"hapi-hemera": "~4.3.0",
+		"hapi-swagger": "~9.1.3",
+		"hemera-jaeger": "~5.0.4",
+		"inert": "~5.1.2",
+		"module-alias": "~2.1.0",
+		"nats": "~1.0.1",
+		"nconf": "~0.10.0",
+		"vision": "~5.4.3",
+		"winston": "~3.1.0",
+		"wurst": "~3.0.1"
+	},
+	"devDependencies": {
+		"@types/hapi": "~17.8.0",
+		"@types/inert": "~5.1.2",
+		"@types/nconf": "~0.0.37",
+		"@types/node": "~10.12.10",
+		"@types/pino": "~5.20.0",
+		"@types/vision": "~5.3.5",
+		"concurrently": "~4.1.0",
+		"dotenv": "~6.1.0",
+		"nodemon": "~1.18.7",
+		"ts-helpers": "~1.1.2",
+		"ts-node": "~7.0.1",
+		"tslint": "~5.11.0",
+		"typescript": "~3.2.1"
+	},
+	"_moduleAliases": {
+		"@environments": "dist/environments/index",
+		"@logger": "dist/logger",
+		"@models": "dist/models",
+		"@routes": "dist/routes",
+		"@utils": "dist/utils"
+	}
+}

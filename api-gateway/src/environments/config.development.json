@@ -1,0 +1,10 @@
+{
+	"API_HOST": "localhost",
+	"API_PORT": 5000,
+	"HEMERA_LOG_LEVEL": "debug",
+	"JWT_SECRET": "SUPER-SECRET",
+	"NATS_URL": "nats://nats:4222",
+	"NATS_USER": "ruser",
+	"NATS_PW": "T0pS3cr3t",
+	"ROUTE_PREFIX": "/api/v1"
+}

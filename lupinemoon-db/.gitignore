@@ -1,0 +1,5 @@
+# OS Files
+.DS_Store
+
+# DB Files
+/db-data/**/*

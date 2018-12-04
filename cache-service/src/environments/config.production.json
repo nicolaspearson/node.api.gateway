@@ -1,0 +1,8 @@
+{
+	"HEMERA_LOG_LEVEL": "error",
+	"NATS_URL": "nats://nats:4222",
+	"NATS_USER": "ruser",
+	"NATS_PW": "T0pS3cr3t",
+	"REDIS_PORT": "6379",
+	"REDIS_URL": "redis"
+}

@@ -1,0 +1,66 @@
+{
+	"name": "node.template.service",
+	"version": "0.0.1",
+	"description": "Template Service",
+	"main": "dist",
+	"author": "Nicolas Pearson",
+	"repository": {
+		"type": "git"
+	},
+	"license": "UNLICENSED",
+	"scripts": {
+		"start": "npm run build && npm run watch",
+		"start:debug": "ts-node --inspect=5858 --debug-brk --ignore false ./src/index.ts",
+		"build": "rm -rf ./dist && npm run build:ts && npm run tslint && npm run copy:env",
+		"build:ts": "tsc --rootDir ./src/",
+		"debug": "npm run build && npm run watch:debug",
+		"serve": "nodemon dist/index.js",
+		"serve:debug": "nodemon --inspect=5858 --debug-brk --ignore false dist/index.js",
+		"watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve\"",
+		"watch:debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve:debug\"",
+		"watch:ts": "tsc -w",
+		"tslint": "tslint --fix -c tslint.json -p tsconfig.json",
+		"clean": "rm -rf node_modules && npm install",
+		"copy:env": "cp ./src/environments/*.json dist/environments/"
+	},
+	"dependencies": {
+		"boom": "~7.3.0",
+		"class-validator": "~0.9.1",
+		"hemera-jaeger": "~5.0.4",
+		"hemera-joi": "~5.3.3",
+		"module-alias": "~2.1.0",
+		"nats": "~1.0.1",
+		"nats-hemera": "~6.1.1",
+		"nconf": "~0.10.0",
+		"pg": "~7.7.1",
+		"reflect-metadata": "~0.1.12",
+		"typeorm": "~0.2.9",
+		"typeorm-infrastructure": "~1.0.4",
+		"winston": "~3.1.0"
+	},
+	"devDependencies": {
+		"@types/boom": "~7.2.1",
+		"@types/nats-hemera": "~2.0.0",
+		"@types/nconf": "~0.0.37",
+		"@types/node": "~10.12.10",
+		"@types/pino": "~5.20.0",
+		"concurrently": "~4.1.0",
+		"dotenv": "~6.1.0",
+		"nodemon": "~1.18.7",
+		"ts-helpers": "~1.1.2",
+		"ts-node": "~7.0.1",
+		"tslint": "~5.11.0",
+		"typescript": "~3.2.1"
+	},
+	"_moduleAliases": {
+		"@actions": "dist/actions/index",
+		"@app": "dist/app",
+		"@environments": "dist/environments/index",
+		"@logger": "dist/logger",
+		"@logic": "dist/logic",
+		"@models": "dist/models",
+		"@repositories": "dist/repositories",
+		"@services": "dist/services",
+		"@utils": "dist/utils"
+	}
+}

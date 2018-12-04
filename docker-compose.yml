@@ -1,0 +1,179 @@
+version: '3.5'
+
+networks:
+    back-tier:
+        driver: bridge
+        name: node-lupinemoon-ms-back
+
+services:
+    nats:
+        hostname: nats-server
+        image: nats-lupinemoon:1.0
+        build:
+            context: './nats'
+        container_name: lupinemoon-nats
+        expose:
+            - 4222
+            - 8222
+        ports:
+            - 4222:4222
+            - 8222:8222
+        restart: always
+        networks:
+            - back-tier
+
+    api-gateway:
+        image: api-gateway-lupinemoon:1.0
+        build:
+            context: './api-gateway'
+        container_name: lupinemoon-api-gateway
+        depends_on:
+            - nats
+            - jaeger
+        labels:
+            - 'traefik.backend=api-gateway'
+            - 'traefik.frontend.rule=PathPrefix: /api/v1'
+            - 'traefik.port=8789'
+            - 'traefik.frontend.entryPoints=http'
+        restart: always
+        environment:
+            - NODE_ENV=staging
+            - API_PORT=8789
+            - API_HOST=0.0.0.0
+            - HEMERA_LOG_LEVEL=error
+            - JAEGER_URL=jaeger
+            - NATS_URL=nats://nats:4222
+            - NATS_USER=ruser
+            - NATS_PW=T0pS3cr3t
+        networks:
+            - back-tier
+
+    cache-service:
+        image: cache-service-lupinemoon:1.0
+        build:
+            context: './cache-service'
+        container_name: lupinemoon-cache-service
+        links:
+            - nats
+            - redis
+        depends_on:
+            - nats
+            - redis
+        restart: always
+        environment:
+            - NODE_ENV=staging
+            - HEMERA_LOG_LEVEL=error
+            - NATS_URL=nats://nats:4222
+            - NATS_USER=ruser
+            - NATS_PW=T0pS3cr3t
+            - REDIS_PORT=6379
+            - REDIS_URL=redis
+        networks:
+            - back-tier
+
+    redis:
+        image: redis:alpine
+        container_name: lupinemoon-redis
+        expose:
+            - 6379
+        ports:
+            - 6379:6379
+        networks:
+            - back-tier
+
+    jaeger:
+        image: jaegertracing/all-in-one:latest
+        container_name: lupinemoon-jaeger
+        ports:
+            - 6832:6832
+            - 5778:5778
+            - 16686:16686
+            - 14268:14268
+            - 9411:9411
+        environment:
+            - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+        networks:
+            - back-tier
+
+    traefik:
+        image: traefik:latest
+        container_name: lupinemoon-traefik
+        command: --api --docker --docker.domain=docker.localhost --logLevel=INFO
+        expose:
+            - 8181
+            - 8182
+        ports:
+            - 8181:8181
+            - 8182:8182
+            - 8183:8080
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./traefik/traefik.toml:/etc/traefik/traefik.toml
+        networks:
+            - back-tier
+
+    postgres-lupinemoon:
+        hostname: postgres-lupinemoon
+        image: postgres:11
+        container_name: lupinemoon-postgres-central
+        expose:
+            - 5432
+        ports:
+            - 5432:5432
+        volumes:
+            - ./lupinemoon-db/db-scripts:/docker-entrypoint-initdb.d
+            - ./lupinemoon-db/db-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_DB=lupinemoon
+            - POSTGRES_USER=master
+            - POSTGRES_PASSWORD=masterkey
+        networks:
+            - back-tier
+
+    auth-service:
+        image: auth-service-lupinemoon:1.0
+        build:
+            context: './auth-service'
+        links:
+            - nats
+            - postgres-lupinemoon
+        depends_on:
+            - nats
+            - redis
+            - jaeger
+        restart: always
+        container_name: lupinemoon-auth-service
+        environment:
+            - NODE_ENV=staging
+            - DB_HOST=postgres-lupinemoon
+            - HEMERA_LOG_LEVEL=debug
+            - JAEGER_URL=jaeger
+            - NATS_URL=nats://nats:4222
+            - NATS_USER=ruser
+            - NATS_PW=T0pS3cr3t
+        networks:
+            - back-tier
+
+    registration-service:
+        image: registration-service-lupinemoon:1.0
+        build:
+            context: './registration-service'
+        container_name: lupinemoon-registration-service
+        links:
+            - nats
+            - postgres-lupinemoon
+        depends_on:
+            - nats
+            - redis
+            - jaeger
+        restart: always
+        environment:
+            - NODE_ENV=staging
+            - DB_HOST=postgres-lupinemoon
+            - HEMERA_LOG_LEVEL=error
+            - JAEGER_URL=jaeger
+            - NATS_URL=nats://nats:4222
+            - NATS_USER=ruser
+            - NATS_PW=T0pS3cr3t
+        networks:
+            - back-tier

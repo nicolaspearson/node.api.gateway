@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "9a9cbb7f-296b-46c9-9c83-5250c443eb2d",
+		"name": "Lupine Moon API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{access-token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/v1/auth/login",
+					"protocol": "http",
+					"host": ["{{host}}"],
+					"port": "{{port}}",
+					"path": ["api", "v1", "auth", "login"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorize",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/v1/auth/authorize",
+					"protocol": "http",
+					"host": ["{{host}}"],
+					"port": "{{port}}",
+					"path": ["api", "v1", "auth", "authorize"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find User By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/v1/auth/find-user-by-id/2?refresh=true",
+					"protocol": "http",
+					"host": ["{{host}}"],
+					"port": "{{port}}",
+					"path": ["api", "v1", "auth", "find-user-by-id", "2"],
+					"query": [
+						{
+							"key": "refresh",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Early Access User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/v1/registration/find-early-access-user/nic@test.com",
+					"protocol": "http",
+					"host": ["{{host}}"],
+					"port": "{{port}}",
+					"path": ["api", "v1", "registration", "find-early-access-user", "nic@test.com"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Early Access User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{access-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "emailAddress",
+							"value": "nic@test.com",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "03AHqfIOlBLbECA2tpPnhSxZQKSZX7PdaoVvBqUneAVipejGIlHNAaHmw9fvsK9OM29GiAX5s3BvNFLIF9YQRE6VuiSs-jaTLWsNA8jyWp1WHmxuYfPUa-dWt_NgjWVEu8somNarRZz3C1vYuZtKbfZGWzb6J07Mkbmu18RKt-jlpHmLuPgPdrSpHxXaxlYKxRSOZ_lQ_yOsAMPAFnHAbITpXMv3F053a24-7Ry4eE3rd6K1dgx8MQgnUmzg_8_ZMphV2bc4e1Pj3UYUliypb8MQZ3D8Xji_StNw",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/v1/registration/early-access",
+					"protocol": "http",
+					"host": ["{{host}}"],
+					"port": "{{port}}",
+					"path": ["api", "v1", "registration", "early-access"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Contact Us Item",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/v1/registration/find-contact-us-item/nic@test.com",
+					"protocol": "http",
+					"host": ["{{host}}"],
+					"port": "{{port}}",
+					"path": ["api", "v1", "registration", "find-contact-us-item", "nic@test.com"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Contact Us Item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{access-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstName",
+							"value": "nic",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "emailAddress",
+							"value": "nic@test.com",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "This is a test message!",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "03AHqfIOlBLbECA2tpPnhSxZQKSZX7PdaoVvBqUneAVipejGIlHNAaHmw9fvsK9OM29GiAX5s3BvNFLIF9YQRE6VuiSs-jaTLWsNA8jyWp1WHmxuYfPUa-dWt_NgjWVEu8somNarRZz3C1vYuZtKbfZGWzb6J07Mkbmu18RKt-jlpHmLuPgPdrSpHxXaxlYKxRSOZ_lQ_yOsAMPAFnHAbITpXMv3F053a24-7Ry4eE3rd6K1dgx8MQgnUmzg_8_ZMphV2bc4e1Pj3UYUliypb8MQZ3D8Xji_StNw",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/v1/registration/contact-us",
+					"protocol": "http",
+					"host": ["{{host}}"],
+					"port": "{{port}}",
+					"path": ["api", "v1", "registration", "contact-us"]
+				}
+			},
+			"response": []
+		}
+	]
+}

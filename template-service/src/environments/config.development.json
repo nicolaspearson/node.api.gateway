@@ -1,0 +1,15 @@
+{
+	"DB_HOST": "localhost",
+	"DB_PORT": 5432,
+	"DB_NAME": "lupinemoon",
+	"DB_LOGGING": "all",
+	"DB_CONNECTION_NAME": "default",
+	"DB_SCHEMA": "template",
+	"DB_PASSWORD": "masterkey",
+	"DB_USERNAME": "master",
+	"HEMERA_LOG_LEVEL": "debug",
+	"JAEGER_URL": "jaeger",
+	"NATS_URL": "nats://localhost:4222",
+	"NATS_USER": "ruser",
+	"NATS_PW": "T0pS3cr3t"
+}

@@ -1,0 +1,19 @@
+{
+	"ACCESS_TOKEN": "secret",
+	"DB_HOST": "localhost",
+	"DB_PORT": 5432,
+	"DB_NAME": "lupinemoon",
+	"DB_LOGGING": false,
+	"DB_CONNECTION_NAME": "default",
+	"DB_SCHEMA": "registration",
+	"DB_PASSWORD": "masterkey",
+	"DB_USERNAME": "master",
+	"HEMERA_LOG_LEVEL": "error",
+	"JAEGER_URL": "jaeger",
+	"NATS_URL": "nats://nats:4222",
+	"NATS_USER": "ruser",
+	"NATS_PW": "T0pS3cr3t",
+	"RECAPTCHA_URL": "https://www.google.com/recaptcha/api/siteverify",
+	"RECAPTCHA_SECRET": "<YOUR-SITE-KEY>",
+	"RECAPTCHA_INVISIBLE_SECRET": "<YOUR-SITE-INVISIBLE-KEY>"
+}

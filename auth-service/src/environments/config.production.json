@@ -1,0 +1,18 @@
+{
+	"ACCESS_TOKEN": "secret",
+	"DB_HOST": "localhost",
+	"DB_PORT": 5432,
+	"DB_NAME": "lupinemoon",
+	"DB_LOGGING": false,
+	"DB_CONNECTION_NAME": "default",
+	"DB_SCHEMA": "auth",
+	"DB_PASSWORD": "masterkey",
+	"DB_USERNAME": "master",
+	"HEMERA_LOG_LEVEL": "error",
+	"JAEGER_URL": "jaeger",
+	"JWT_SECRET": "SUPER-SECRET",
+	"JWT_EXPIRATION": "1d",
+	"NATS_URL": "nats://nats:4222",
+	"NATS_USER": "ruser",
+	"NATS_PW": "T0pS3cr3t"
+}
