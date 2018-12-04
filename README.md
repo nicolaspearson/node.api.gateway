@@ -18,7 +18,7 @@ The structure of this project allows us to easily scale workers in seconds. NATS
 -   -   This will remove the containers that were created
 -   Use the Postman file in `./system/postman` to test API requests.
 
-## Need a frontend
+## Need a React frontend
 
 An integrated React frontend has been developed and can be found at [react.antd.fuse](https://github.com/nicolaspearson/react.antd.fuse)
 
@@ -30,6 +30,10 @@ Captcha codes have been integrated using reCaptcha. Register for v2 reCaptcha co
 "RECAPTCHA_SECRET": "<YOUR-SITE-KEY>"
 "RECAPTCHA_INVISIBLE_SECRET": "<YOUR-SITE-INVISIBLE-KEY>"
 ```
+
+## Need a Kubernetes deployment
+
+This project has been integrated with Kubernetes and can be found at [kubernetes.api.gateway](https://github.com/nicolaspearson/kubernetes.api.gateway)
 
 ## Development
 
